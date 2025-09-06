@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="utf-8">
+    <title>Agendamento de Entrega</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- CSS personalizado -->
+    <link rel="stylesheet" href="estilos.css">
+    <!-- JS personalizado -->
+    <script defer src="utils.js"></script>
+</head>
+
+<body>
+    <header class="container fixed-top bg-light shadow-sm py-3">
+        <div class="d-flex justify-content-between align-items-center">
+            <div class="d-flex align-items-center" style="cursor: pointer;" onclick="location.href='index.html'">
+                <img src="imagens/logo.jpg" alt="Logo" width="80" height="80">
+                <h1 class="h3 me-3">Minimercado Buss</h1>
+            </div>
+            <div class="menu-img">
+                <a href="cadastroCliente.html">
+                    <img src="imagens/menuusuario.png" alt="Menu usuário" width="80" height="80">
+                </a>
+            </div>
+        </div>
+        <nav class="mt-3">
+            <ul class="nav nav-pills justify-content-center">
+                <li class="nav-item"><a class="nav-link" href="index.html#categoria01">Frutas e Verduras</a></li>
+                <li class="nav-item"><a class="nav-link" href="index.html#categoria02">Alimentos Não Perecíveis</a></li>
+                <li class="nav-item"><a class="nav-link" href="index.html#categoria03">Higiene e Limpeza</a></li>
+                <li class="nav-item"><a class="nav-link" href="index.html#categoria04">Serviços</a></li>
+                <li class="nav-item"><a class="nav-link" href="index.html#Contatos">Contatos</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main class="container mt-5 pt-4">
+        <div class="container my-4">
+            <h1>Agendamento de Entrega</h1>
+            <button type="button" onclick="location.href='index.html'" class="btn btn-secondary">Voltar</button>
+            <form action="#" method="post" onsubmit="salvarRegistro(event, this)">
+                <fieldset class="border p-3 mb-4 rounded">
+                    <legend class="float-none w-auto px-2">Agendamento</legend>
+
+                    <div class="mb-3">
+                        <label for="data" class="form-label">Data e hora da entrega <span
+                                class="text-danger">*</span></label>
+                        <input id="data" name="data" type="datetime-local" required class="form-control"
+                            onblur="validarHorario(this)">
+                        <div><small id="mensagem_erro" class="text-danger"></small></div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Endereço da entrega <span class="text-danger">*</span></label>
+                        <div class="d-flex">
+                            <div class="form-check me-3">
+                                <input type="radio" class="form-check-input" name="endereco" value="cadastro"
+                                    id="endereco_cadastro" required
+                                    onchange="habilitarInformacoesAdicionais(this.id, 'novo', 'endereco_novo')" checked>
+                                <label class="form-check-label" for="endereco_cadastro">Usar endereço do
+                                    cadastro</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="radio" class="form-check-input" name="endereco" value="novo"
+                                    id="endereco_novo_radio"
+                                    onchange="habilitarInformacoesAdicionais(this.id, 'novo', 'endereco_novo')">
+                                <label class="form-check-label" for="endereco_novo_radio">Informar novo endereço</label>
+                            </div>
+                        </div>
+
+
+                        <fieldset id="endereco_novo" class="border p-3 mt-3 rounded" disabled>
+                            <legend class="float-none w-auto px-2">Endereço</legend>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="cep" class="form-label">CEP <span class="text-danger">*</span></label>
+                                    <input id="cep" name="cep" type="text" inputmode="numeric" placeholder="00000-000"
+                                        pattern="^\d{5}-?\d{3}$" title="Informe o CEP de 8 dígitos" class="form-control"
+                                        required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="estado" class="form-label">Estado (UF) <span
+                                            class="text-danger">*</span></label>
+                                    <select id="estado" name="estado" class="form-select" required>
+                                        <option value="" selected disabled>Selecione</option>
+                                        <option>AC</option>
+                                        <option>AL</option>
+                                        <option>AP</option>
+                                        <option>AM</option>
+                                        <option>BA</option>
+                                        <option>CE</option>
+                                        <option>DF</option>
+                                        <option>ES</option>
+                                        <option>GO</option>
+                                        <option>MA</option>
+                                        <option>MT</option>
+                                        <option>MS</option>
+                                        <option>MG</option>
+                                        <option>PA</option>
+                                        <option>PB</option>
+                                        <option>PR</option>
+                                        <option>PE</option>
+                                        <option>PI</option>
+                                        <option>RJ</option>
+                                        <option>RN</option>
+                                        <option>RS</option>
+                                        <option>RO</option>
+                                        <option>RR</option>
+                                        <option>SC</option>
+                                        <option>SP</option>
+                                        <option>SE</option>
+                                        <option>TO</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-md-6 mb-3">
+                                    <label for="cidade" class="form-label">Cidade <span
+                                            class="text-danger">*</span></label>
+                                    <input id="cidade" name="cidade" type="text" placeholder="Cidade"
+                                        class="form-control" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="bairro" class="form-label">Bairro <span
+                                            class="text-danger">*</span></label>
+                                    <input id="bairro" name="bairro" type="text" placeholder="Bairro"
+                                        class="form-control" required>
+                                </div>
+
+                                <div class="col-md-6 mb-3">
+                                    <label for="logradouro" class="form-label">Logradouro <span
+                                            class="text-danger">*</span></label>
+                                    <input id="logradouro" name="logradouro" type="text" placeholder="Logradouro"
+                                        class="form-control" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="numero" class="form-label">Número <span
+                                            class="text-danger">*</span></label>
+                                    <input id="numero" name="numero" type="text" placeholder="Número do endereço"
+                                        class="form-control" required>
+                                </div>
+
+                                <div class="col-md-6 mb-3">
+                                    <label for="complemento" class="form-label">Complemento</label>
+                                    <input id="complemento" name="complemento" type="text" placeholder="Complemento"
+                                        class="form-control">
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                </fieldset>
+
+                <div class="mt-4">
+                    <button type="reset" class="btn btn-secondary"
+                        onclick="habilitarInformacoesAdicionais(document.getElementsByName('endereco')[0].id, 'novo', 'endereco_novo')">Limpar</button>
+                    <button type="submit" class="btn btn-primary me-2">Enviar cadastro</button>
+                </div>
+            </form>
+        </div>
+    </main>
+    <footer id="Contatos">
+        <div class="container text-center">
+            <hr>
+            <p><strong>Contato:</strong></p>
+            <ul class="list-unstyled">
+                <li>Email: <a href="mailto:contato@minimercadobuss.com.br">contato@minimercadobuss.com.br</a></li>
+                <li>Telefone: (47) 1234-5678</li>
+                <li>Endereço: Rua Exemplo, 123 - Cidade, Estado</li>
+            </ul>
+            <p><strong>Horários de entregas e retiradas: 9:00 às 21:00</strong></p>
+            <p>&copy; 2025 Supermercado Exemplo. Todos os direitos reservados.</p>
+            <p>Desenvolvido por José C. Buss</p>
+            <p>Site feito utilizando HTML5 e <a href="https://getbootstrap.com/docs/5.3/getting-started/introduction/"
+                    target="_blank"> Bootstrap 5 </a> </p>
+        </div>
+    </footer>
+</body>
+
+</html>

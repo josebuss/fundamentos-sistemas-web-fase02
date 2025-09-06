@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Cliente - Minimercado Buss</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- CSS personalizado -->
+    <link rel="stylesheet" href="estilos.css">
+    <!-- JS personalizado -->
+    <script defer src="utils.js"></script>
+</head>
+
+<body>
+    <header class="container fixed-top bg-light shadow-sm py-3">
+        <div class="d-flex justify-content-between align-items-center">
+            <div class="d-flex align-items-center" style="cursor: pointer;" onclick="location.href='index.html'">
+                <img src="imagens/logo.jpg" alt="Logo" width="80" height="80">
+                <h1 class="h3 me-3">Minimercado Buss</h1>
+            </div>
+            <div class="menu-img">
+                <a href="cadastroCliente.html">
+                    <img src="imagens/menuusuario.png" alt="Menu usuário" width="80" height="80">
+                </a>
+            </div>
+        </div>
+        <nav class="mt-3">
+            <ul class="nav nav-pills justify-content-center">
+                <li class="nav-item"><a class="nav-link" href="index.html#categoria01">Frutas e Verduras</a></li>
+                <li class="nav-item"><a class="nav-link" href="index.html#categoria02">Alimentos Não Perecíveis</a></li>
+                <li class="nav-item"><a class="nav-link" href="index.html#categoria03">Higiene e Limpeza</a></li>
+                <li class="nav-item"><a class="nav-link" href="index.html#categoria04">Serviços</a></li>
+                <li class="nav-item"><a class="nav-link" href="index.html#Contatos">Contatos</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main class="container mt-5 pt-4">
+        <div class="container">
+            <h1>Cadastro de Cliente</h1>
+            <button type="button" onclick="location.href='index.html'" class="btn btn-secondary">Voltar</button>
+            <form action="#" method="post" onsubmit="salvarRegistro(event, this)">
+                <fieldset class="border p-3 mb-4 rounded">
+                    <legend class="float-none w-auto px-2">Identificação</legend>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="nome">Nome completo<span class="text-danger">*</span></label>
+                            <input id="nome" name="nome" type="text" placeholder="Nome completo" minlength="3"
+                                maxlength="120" title="Informe o nome completo" required autofocus
+                                class="form-control" />
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="cpf">CPF<span class="text-danger">*</span></label>
+                            <input id="cpf" name="cpf" type="text" placeholder="000.000.000-00" maxlength="14"
+                                pattern="^\d{3}\.?\d{3}\.?\d{3}-?\d{2}$" title="Digite 11 dígitos do CPF" required
+                                class="form-control" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="nascimento">Data de nascimento</label>
+                            <input id="nascimento" name="nascimento" type="date" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label>Sexo<span class="text-danger">*</span></label>
+                            <div class="form-check">
+                                <input type="radio" class="form-check-input" id="sexo1" name="sexo" value="Feminino"
+                                    required />
+                                <label for="sexo1" class="form-check-label">Feminino</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="radio" class="form-check-input" id="sexo2" name="sexo" value="Masculino" />
+                                <label for="sexo2" class="form-check-label">Masculino</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="radio" class="form-check-input" id="sexo3" name="sexo" value="Outro" />
+                                <label for="sexo3" class="form-check-label">Outro</label>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset class="border p-3 mb-4 rounded">
+                    <legend class="float-none w-auto px-2">Contato</legend>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="email">E-mail<span class="text-danger">*</span></label>
+                            <input id="email" name="email" type="email" placeholder="nome@exemplo.com" required
+                                class="form-control" />
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="telefone">Telefone<span class="text-danger">*</span></label>
+                            <input id="telefone" name="telefone" type="tel" placeholder="(00) 0000-0000"
+                                pattern="^\(?\d{2}\)?\s?9?\d{4}-?\d{4}$" title="Use DDD e número" required
+                                class="form-control" />
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label>Preferências de contato</label>
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="pref_contato1" name="pref_contato[]"
+                                value="email" checked />
+                            <label for="pref_contato1" class="form-check-label">E-mail</label>
+                        </div>
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="pref_contato2" name="pref_contato[]"
+                                value="telefone" />
+                            <label for="pref_contato2" class="form-check-label">Telefone</label>
+                        </div>
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="pref_contato3" name="pref_contato[]"
+                                value="whatsapp" />
+                            <label for="pref_contato3" class="form-check-label">WhatsApp</label>
+                        </div>
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="pref_contato4" name="pref_contato[]"
+                                value="sms" />
+                            <label for="pref_contato4" class="form-check-label">SMS</label>
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset class="border p-3 mb-4 rounded">
+                    <legend class="float-none w-auto px-2">Endereço</legend>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="cep">CEP<span class="text-danger">*</span></label>
+                            <input id="cep" name="cep" type="text" inputmode="numeric" placeholder="00000-000"
+                                pattern="^\d{5}-?\d{3}$" title="Informe o CEP de 8 dígitos" required
+                                class="form-control" />
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="estado">Estado (UF)<span class="text-danger">*</span></label>
+                            <select id="estado" name="estado" class="form-select" required>
+                                <option value="" selected disabled>Selecione</option>
+                                <option>AC</option>
+                                <option>AL</option>
+                                <option>AP</option>
+                                <option>AM</option>
+                                <option>BA</option>
+                                <option>CE</option>
+                                <option>DF</option>
+                                <option>ES</option>
+                                <option>GO</option>
+                                <option>MA</option>
+                                <option>MT</option>
+                                <option>MS</option>
+                                <option>MG</option>
+                                <option>PA</option>
+                                <option>PB</option>
+                                <option>PR</option>
+                                <option>PE</option>
+                                <option>PI</option>
+                                <option>RJ</option>
+                                <option>RN</option>
+                                <option>RS</option>
+                                <option>RO</option>
+                                <option>RR</option>
+                                <option>SC</option>
+                                <option>SP</option>
+                                <option>SE</option>
+                                <option>TO</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="cidade">Cidade<span class="text-danger">*</span></label>
+                            <input id="cidade" name="cidade" type="text" placeholder="Cidade" required
+                                class="form-control" />
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="bairro">Bairro<span class="text-danger">*</span></label>
+                            <input id="bairro" name="bairro" type="text" placeholder="Bairro" required
+                                class="form-control" />
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="logradouro">Logradouro<span class="text-danger">*</span></label>
+                            <input id="logradouro" name="logradouro" type="text" placeholder="Logradouro" required
+                                class="form-control" />
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="numero">Número<span class="text-danger">*</span></label>
+                            <input id="numero" name="numero" type="text" placeholder="Número do endereço" required
+                                class="form-control" />
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="complemento">Complemento</label>
+                            <input id="complemento" name="complemento" type="text" placeholder="Complemento"
+                                class="form-control" />
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset class="border p-3 mb-4 rounded">
+                    <legend class="float-none w-auto px-2">Outras informações</legend>
+                    <div class="form-check mb-3">
+                        <input type="checkbox" class="form-check-input" id="newsletter" name="newsletter" checked />
+                        <label class="form-check-label" for="newsletter">Sim, desejo receber novidades por
+                            e-mail</label>
+                    </div>
+                    <div class="mb-3">
+                        <label for="observacoes">Observações</label>
+                        <textarea id="observacoes" name="observacoes" rows="3"
+                            placeholder="Informações adicionais relevantes" class="form-control"></textarea>
+                    </div>
+                </fieldset>
+                <div class="form-check mb-3">
+                    <input type="checkbox" class="form-check-input" id="termos" name="termos" required />
+                    <label for="termos" class="form-check-label">Declaro que li e aceito os termos de uso e a política
+                        de
+                        privacidade<span class="text-danger">*</span></label>
+                </div>
+                <div class="form-footer">
+                    <button type="reset" class="btn btn-secondary">Limpar</button>
+                    <button type="submit" class="btn btn-primary">Enviar cadastro</button>
+                </div>
+            </form>
+        </div>
+    </main>
+    <footer id="Contatos">
+        <div class="container text-center">
+            <hr>
+            <p><strong>Contato:</strong></p>
+            <ul class="list-unstyled">
+                <li>Email: <a href="mailto:contato@minimercadobuss.com.br">contato@minimercadobuss.com.br</a></li>
+                <li>Telefone: (47) 1234-5678</li>
+                <li>Endereço: Rua Exemplo, 123 - Cidade, Estado</li>
+            </ul>
+            <p><strong>Horários de entregas e retiradas: 9:00 às 21:00</strong></p>
+            <p>&copy; 2025 Supermercado Exemplo. Todos os direitos reservados.</p>
+            <p>Desenvolvido por José C. Buss</p>
+            <p>Site feito utilizando HTML5 e <a href="https://getbootstrap.com/docs/5.3/getting-started/introduction/"
+                    target="_blank"> Bootstrap 5 </a> </p>
+        </div>
+    </footer>
+</body>
+
+</html>

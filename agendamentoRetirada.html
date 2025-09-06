@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset='utf-8'>
+    <title>Agendamento de retirada</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- CSS personalizado -->
+    <link rel="stylesheet" href="estilos.css">
+    <!-- JS personalizado -->
+    <script defer src="utils.js"></script>
+</head>
+
+<body>
+    <header class="container fixed-top bg-light shadow-sm py-3">
+        <div class="d-flex justify-content-between align-items-center">
+            <div class="d-flex align-items-center" style="cursor: pointer;" onclick="location.href='index.html'">
+                <img src="imagens/logo.jpg" alt="Logo" width="80" height="80">
+                <h1 class="h3 me-3">Minimercado Buss</h1>
+            </div>
+            <div class="menu-img">
+                <a href="cadastroCliente.html">
+                    <img src="imagens/menuusuario.png" alt="Menu usuário" width="80" height="80">
+                </a>
+            </div>
+        </div>
+        <nav class="mt-3">
+            <ul class="nav nav-pills justify-content-center">
+                <li class="nav-item"><a class="nav-link" href="index.html#categoria01">Frutas e Verduras</a></li>
+                <li class="nav-item"><a class="nav-link" href="index.html#categoria02">Alimentos Não Perecíveis</a></li>
+                <li class="nav-item"><a class="nav-link" href="index.html#categoria03">Higiene e Limpeza</a></li>
+                <li class="nav-item"><a class="nav-link" href="index.html#categoria04">Serviços</a></li>
+                <li class="nav-item"><a class="nav-link" href="index.html#Contatos">Contatos</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main class="container mt-5 pt-4">
+        <div class="container my-4">
+            <h1>Agendamento de retirada</h1>
+            <button type="button" onclick="location.href='index.html'" class="btn btn-secondary">Voltar</button>
+            <form action="#" method="post" onsubmit="salvarRegistro(event, this)">
+                <fieldset class="border p-3 mb-4 rounded">
+                    <legend class="float-none w-auto px-2">Agendamento</legend>
+                    <div class="mb-3">
+                        <label for="data" class="form-label">Data e hora da retirada <span
+                                class="text-danger">*</span></label>
+                        <input id="data" name="data" type="datetime-local" class="form-control" required
+                            onblur="validarHorario(this)" />
+                        <div><a id="mensagem_erro" class="text-danger"></a></div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Informações de retirada <span class="text-danger">*</span></label>
+                        <div class="d-flex gap-3">
+                            <div class="form-check">
+                                <input type="radio" class="form-check-input" name="responsavel" value="usuario"
+                                    id="retirada_usuario"
+                                    onchange="habilitarInformacoesAdicionais(this.id, 'externo', 'identificacao_pessoa')"
+                                    required checked>
+                                <label class="form-check-label" for="retirada_usuario">Retirada pelo usuário</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="radio" class="form-check-input" name="responsavel" value="externo"
+                                    id="retirada_externo"
+                                    onchange="habilitarInformacoesAdicionais(this.id, 'externo', 'identificacao_pessoa')">
+                                <label class="form-check-label" for="retirada_externo">Informar outra pessoa</label>
+                            </div>
+                        </div>
+
+                        <fieldset id="identificacao_pessoa" class="border p-3 mt-3 rounded" disabled>
+                            <legend class="float-none w-auto px-2">Identificação</legend>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="nome" class="form-label">Nome completo <span
+                                            class="text-danger">*</span></label>
+                                    <input id="nome" name="nome" type="text" class="form-control"
+                                        placeholder="Nome completo" minlength="3" maxlength="120" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="cpf" class="form-label">CPF <span class="text-danger">*</span></label>
+                                    <input id="cpf" name="cpf" type="text" class="form-control"
+                                        placeholder="000.000.000-00" maxlength="14"
+                                        pattern="^\d{3}\.?\d{3}\.?\d{3}-?\d{2}$" required>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                </fieldset>
+
+                <div class="d-flex gap-2">
+                    <button type="reset" class="btn btn-secondary"
+                        onclick="habilitarInformacoesAdicionais(document.getElementsByName('responsavel')[0].id, 'externo', 'identificacao_pessoa')">Limpar</button>
+                    <button type="submit" class="btn btn-primary">Enviar cadastro</button>
+                </div>
+            </form>
+        </div>
+    </main>
+    <footer id="Contatos">
+        <div class="container text-center">
+            <hr>
+            <p><strong>Contato:</strong></p>
+            <ul class="list-unstyled">
+                <li>Email: <a href="mailto:contato@minimercadobuss.com.br">contato@minimercadobuss.com.br</a></li>
+                <li>Telefone: (47) 1234-5678</li>
+                <li>Endereço: Rua Exemplo, 123 - Cidade, Estado</li>
+            </ul>
+            <p><strong>Horários de entregas e retiradas: 9:00 às 21:00</strong></p>
+            <p>&copy; 2025 Supermercado Exemplo. Todos os direitos reservados.</p>
+            <p>Desenvolvido por José C. Buss</p>
+            <p>Site feito utilizando HTML5 e <a href="https://getbootstrap.com/docs/5.3/getting-started/introduction/"
+                    target="_blank"> Bootstrap 5 </a> </p>
+        </div>
+    </footer>
+</body>
+
+</html>
